@@ -8,15 +8,14 @@
     <ScrollView
         android:layout_width="326dp"
         android:layout_height="625dp"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:orientation="vertical">
 
 
             <ImageView
@@ -29,32 +28,36 @@
                 android:id="@+id/figureName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Имя"
                 android:fontFamily="@font/lato"
-                android:textSize="24dp"
-                android:gravity="center" />
+                android:gravity="center"
+                android:text="Имя"
+                android:textSize="24dp" />
+
             <Space
                 android:layout_width="10dp"
-                android:layout_height="10dp"/>
+                android:layout_height="10dp" />
+
             <TextView
                 android:id="@+id/figureDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Годы жизни"
                 android:fontFamily="@font/lato"
-                android:textSize="24dp"
-                android:gravity="center" />
+                android:gravity="center"
+                android:text="Годы жизни"
+                android:textSize="24dp" />
+
             <Space
                 android:layout_width="10dp"
-                android:layout_height="10dp"/>
+                android:layout_height="10dp" />
+
             <TextView
                 android:id="@+id/figureInformation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Информация"
                 android:fontFamily="@font/lato"
-                android:textSize="24dp"
-                android:gravity="center" />
+                android:gravity="center"
+                android:text="Информация"
+                android:textSize="24dp" />
 
         </LinearLayout>
     </ScrollView>
