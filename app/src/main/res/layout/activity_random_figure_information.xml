@@ -6,14 +6,76 @@
     android:layout_height="match_parent"
     tools:context=".RandomFigureInformation">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/informationFigure"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <ScrollView
+        android:layout_width="360dp"
+        android:layout_height="574dp"
         android:layout_marginTop="50dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:id="@+id/imageFigure"
+                android:layout_width="300dp"
+                android:layout_height="240dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                 />
+
+
+            <TextView
+                android:id="@+id/figureName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato"
+                android:gravity="center"
+                android:text="Имя"
+                android:textSize="24dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageFigure" />
+
+
+            <TextView
+                android:id="@+id/figureDate"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato"
+                android:gravity="center"
+                android:text="Годы жизни"
+                android:textSize="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/figureName" />
+
+
+            <TextView
+                android:id="@+id/figureInformation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lato"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Информация"
+                android:textSize="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/figureDate" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="wrap_content"

@@ -17,7 +17,7 @@ class HomePage : AppCompatActivity() {
         }
 
         binding.randomFigure.setOnClickListener {
-            startActivity(Intent(this, FinishTestQuotes::class.java))
+            startActivity(Intent(this, RandomFigureInformation::class.java))
         }
     }
 }
