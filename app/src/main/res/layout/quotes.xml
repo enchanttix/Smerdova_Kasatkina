@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/lato"
         android:gravity="center"
-        android:text="Цитата"
+        android:text="Цитата\n"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,13 +1,10 @@
 package com.example.smerdova_kasatkina.API
 
-import com.google.gson.GsonBuilder
-import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Header
-import retrofit2.http.POST
 
 data class Authors(
     var Id: Int,
@@ -37,7 +34,7 @@ interface APIInterface
     @GET("api/GetAuthor")
     fun GetAuthor(@Header("Id")Id: Int): Call<Authors>
     @GET("api/GetAllQuotes")
-    fun GetAllQuotes(@Header("Id")Id: Int): Call<Quotes>
+    fun GetAllQuotes(@Header("Id")Id: Int): Call<MutableList<Quotes>>
 
 }
 public class RetrofitConnection

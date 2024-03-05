@@ -2,19 +2,15 @@ package com.example.smerdova_kasatkina
 
 import android.content.ContentValues
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.example.smerdova_kasatkina.API.APIInterface
 import com.example.smerdova_kasatkina.API.Authors
-import com.example.smerdova_kasatkina.API.RetrofitConnection
 import com.example.smerdova_kasatkina.databinding.ActivityRandomFigureInformationBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.awaitResponse
 import retrofit2.converter.gson.GsonConverterFactory
@@ -29,21 +25,27 @@ class RandomFigureInformation : AppCompatActivity() {
         binding.buttonHome.setOnClickListener {
             startActivity(Intent(this, HomePage::class.java))
         }
+        binding.buttonQuotes.setOnClickListener {
+            startActivity((Intent(this, ListQuotesPage::class.java)))
+        }
 
-        /*      RetrofitConnection().GetRetrofit().GetAuthor(5).enqueue(object:Callback<Authors>{
+              /*RetrofitConnection().GetRetrofit().GetAuthor(5).enqueue(object: Callback<Authors>{
                   override fun onResponse(call: Call<Authors>, response: Response<Authors>) {
+                      Log.d("Response", response.code().toString())
                       if (response.code()==204)
                       {
-                          Log.println(Log.INFO, "API", "Я зашел сюда")
+                          Log.d("Response", response.code().toString())
                           SetInformationAuthors(response.body()!!)
                       }
                   }
 
                   override fun onFailure(call: Call<Authors>, t: Throwable) {
-                      Log.println(Log.INFO, "API", "Я зашел сюда ex")
+                      TODO("Not yet implemented")
                   }
               })*/
+
         getdata()
+
     }
 
     fun getdata() {
@@ -55,10 +57,14 @@ class RandomFigureInformation : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 var response = retrofit.GetAuthor(5).awaitResponse()
+                Log.d("Response", response.code().toString())
                 if (response.isSuccessful) {
-                    /*  val data = response.body()!! // Получаем тело ответа
-                      Log.d("Response", data.Fio.toString())*/
-                    Log.d("Response", "Success") // Вывод информации на консоль
+                      val data = response.body()!! // Получаем тело ответа
+                      /*Log.d("Response", data.Fio.toString())
+                    binding.figureName.text = response.body()!!.Fio
+                    binding.figureInformation.text = response.body()!!.Description
+                    binding.figureDate.text = response.body()!!.YearsOfLife*/
+                    Log.d("Response", response.code().toString()) // Вывод информации на консоль
                 }
 
             } catch (e: Exception) {
