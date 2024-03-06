@@ -15,4 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Smerdova_Kasatkina"
 include(":app")
+
  

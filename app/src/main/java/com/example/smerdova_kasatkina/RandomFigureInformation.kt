@@ -52,6 +52,7 @@ class RandomFigureInformation : AppCompatActivity() {
                             Log.d("Response", response.code().toString())
                             IdAuthor=response.body()!!.id
                             intent.putExtra("IdAuthor", IdAuthor)
+                            intent.putExtra("FioAuthor", response.body()!!.fio.toString())
                             SetInformationAuthors(response.body()!!)
                         }
                     }
@@ -61,7 +62,7 @@ class RandomFigureInformation : AppCompatActivity() {
                         binding.figureName.text = Author.fio
                         binding.figureInformation.text = Author.description
                         binding.figureDate.text = Author.years_of_life
-                        //Picasso.get().load(Author.image).into(binding.imageFigure)
+                        Picasso.get().load(Author.image).into(binding.imageFigure)
                     }
 
                     override fun onFailure(call: Call<Authors>, t: Throwable) {

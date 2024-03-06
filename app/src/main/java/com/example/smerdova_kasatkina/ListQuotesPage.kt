@@ -13,6 +13,9 @@ import com.example.smerdova_kasatkina.API.Quotes
 import com.example.smerdova_kasatkina.API.RetrofitConnection
 import com.example.smerdova_kasatkina.databinding.ActivityListQuotesPageBinding
 import com.example.smerdova_kasatkina.databinding.QuotesBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,20 +34,15 @@ class ListQuotesPage : AppCompatActivity() {
             finish()
         }
         var IdAuthor=intent.getIntExtra("IdAuthor", 1)
-        RetrofitConnection().GetRetrofit().GetAuthor(IdAuthor).enqueue(object:Callback<Authors>{
-            override fun onResponse(call: Call<Authors>, response: Response<Authors>) {
-                Log.d("Authors", response.code().toString())
-                if(response.code()==200)
-                {
-                    SetAuthorName(response.body()!!)
-                }
-            }
+        var FioAuthor=intent.getStringExtra("FioAuthor")
+        SetAuthorName(FioAuthor.toString())
+        GetAllQuotes(IdAuthor)
 
-            override fun onFailure(call: Call<Authors>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-        })
-
+    }
+    fun GetAllQuotes(IdAuthor:Int)
+    {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
         RetrofitConnection().GetRetrofit().GetAllQuotes(IdAuthor).enqueue(object:Callback<MutableList<Quotes>>
         {
             override fun onResponse(call: Call<MutableList<Quotes>>, response: Response<MutableList<Quotes>>)
@@ -61,6 +59,10 @@ class ListQuotesPage : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         })
+            } catch (e: Exception) {
+
+            }
+        }
     }
     fun SetResyclerView(ItemCollection: MutableList<Quotes>)
     {
@@ -80,9 +82,9 @@ class ListQuotesPage : AppCompatActivity() {
             return ItemCollection.size
         }
     }
-    fun SetAuthorName(Author:Authors)
+    fun SetAuthorName(Fio:String)
     {
-        binding.figureNameList.text=Author.fio
+        binding.figureNameList.text=Fio
     }
 
     class RecyclerViewViewHolder(var binding: QuotesBinding): RecyclerView.ViewHolder(binding.root)

@@ -35,7 +35,7 @@ interface APIInterface
     @GET("api/GetAuthor")
     fun GetAuthor(@Query("Id")Id: Int): Call<Authors>
     @GET("api/GetAllQuotes")
-    fun GetAllQuotes(@Query("Id")Id: Int): Call<MutableList<Quotes>>
+    fun GetAllQuotes(@Query("AuthorId")Id: Int): Call<MutableList<Quotes>>
 
 }
 public class RetrofitConnection

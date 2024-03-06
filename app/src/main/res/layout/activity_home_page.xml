@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/background_button"
             android:fontFamily="@font/lato"
-            android:text="Пройти тест"
+            android:text="Оцени свои знания"
             android:textAllCaps="false"
             android:textSize="24dp" />
 

@@ -93,15 +93,32 @@
 
 
     </ScrollView>
-    <Button
-        android:id="@+id/buttonNext"
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/next_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scroll"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/scroll">
 
+        <Button
+            android:id="@+id/buttonHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/home_button"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <Space
+            android:layout_width="100dp"
+            android:layout_height="1dp" />
+
+        <Button
+            android:id="@+id/buttonNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/next_button"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
