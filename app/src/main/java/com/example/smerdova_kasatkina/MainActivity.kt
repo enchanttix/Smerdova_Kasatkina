@@ -13,6 +13,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val intent= Intent(this, HomePage::class.java)
-        startActivity(intent)
+        android.os.Handler().postDelayed({
+            startActivity(intent)
+        }, 2000)
     }
 }

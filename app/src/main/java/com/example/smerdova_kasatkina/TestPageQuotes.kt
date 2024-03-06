@@ -1,12 +1,17 @@
 package com.example.smerdova_kasatkina
 
+import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.smerdova_kasatkina.API.Authors
 import com.example.smerdova_kasatkina.API.Quotes
 import com.example.smerdova_kasatkina.API.RetrofitConnection
 import com.example.smerdova_kasatkina.databinding.ActivityTestPageQuotesBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,41 +24,46 @@ class TestPageQuotes : AppCompatActivity() {
         binding = ActivityTestPageQuotesBinding.inflate(layoutInflater)
         setContentView(binding.root)
         var randomQuote = Random.nextInt(1, 500)//выбор рандомной цитаты
-        lateinit var _Quote:Quotes
-        _Quote.Id=0
-        _Quote.Quote=""
-        _Quote.IdAuthor=0
 
+        var Quote:String=""
+        var IdAuthor:Int=0
 
-
-        RetrofitConnection().GetRetrofit().GetQuote(randomQuote).enqueue(object:Callback<Quotes>{
-            override fun onResponse(call: Call<Quotes>, response: Response<Quotes>) {
+        RetrofitConnection().GetRetrofit().GetQuote(randomQuote).enqueue(object:Callback<Quotes>//подключение
+        {
+            override fun onResponse(call: Call<Quotes>, response: Response<Quotes>)
+            {
+                Log.d("Author", response.code().toString())
+                var r=response
                 if(response.code()==200)
                 {
-                    _Quote=response.body()!!
+                    Log.d("Author", "я зашел в цитаты")
+                    Quote= response.body()!!.quote.toString()
+                    IdAuthor=response.body()!!.id_author
                 }
             }
 
-            override fun onFailure(call: Call<Quotes>, t: Throwable) {
+            override fun onFailure(call: Call<Quotes>, t: Throwable)
+            {
                 TODO("Not yet implemented")
             }
         })
-        binding.quotesText.text=_Quote.Quote//вставка цитаты
-        var FioCorrectAuthor=GetAuthors(_Quote.IdAuthor)//правильный автор
 
-        var IdAuthorsUncorrect1=GetRandomAuthors(_Quote.IdAuthor)//первый неправильный автор
-        var IdAuthorsUncorrect2=GetRandomAuthors(_Quote.IdAuthor)//второй неправильный автор
-        var IdAuthorsUncorrect3=GetRandomAuthors(_Quote.IdAuthor)//третий неправильный автор
+        binding.quotesText.text=Quote//вставка цитаты
+        var FioCorrectAuthor=GetAuthors(IdAuthor)//правильный автор
 
-        var FioUncorrectAuthor1=GetAuthors(IdAuthorsUncorrect1)//первый правильный автор
-        var FioUncorrectAuthor2=GetAuthors(IdAuthorsUncorrect2)//второй правильный автор
-        var FioUncorrectAuthor3=GetAuthors(IdAuthorsUncorrect3)//третий правильный автор
+        var IdAuthorsUncorrect1=GetRandomAuthors(IdAuthor)//код первого неправильного автора
+        var IdAuthorsUncorrect2=GetRandomAuthors(IdAuthor)//код второго неправильного автора
+        var IdAuthorsUncorrect3=GetRandomAuthors(IdAuthor)//код третьего неправильного автора
+
+        var FioUncorrectAuthor1=GetAuthors(IdAuthorsUncorrect1)//первый правильный автор фио
+        var FioUncorrectAuthor2=GetAuthors(IdAuthorsUncorrect2)//второй правильный автор фио
+        var FioUncorrectAuthor3=GetAuthors(IdAuthorsUncorrect3)//третий правильный автор фио
 
         var IdCorrectButton:Int=RandomButtonAnswer(FioCorrectAuthor, FioUncorrectAuthor1, FioUncorrectAuthor2, FioUncorrectAuthor3)//зарандомить ответы и получить код правильной кнопки
         binding.figureAnswers1.setOnClickListener { binding.figureAnswers1.setBackgroundResource(R.drawable.background_button_green) }
-        binding.figureAnswers2.setOnClickListener { binding.figureAnswers1.setBackgroundResource(R.drawable.background_button_green) }
-        binding.figureAnswers3.setOnClickListener { binding.figureAnswers1.setBackgroundResource(R.drawable.background_button_green) }
-        binding.figureAnswers4.setOnClickListener { binding.figureAnswers1.setBackgroundResource(R.drawable.background_button_green) }
+        binding.figureAnswers2.setOnClickListener { binding.figureAnswers2.setBackgroundResource(R.drawable.background_button_green) }
+        binding.figureAnswers3.setOnClickListener { binding.figureAnswers3.setBackgroundResource(R.drawable.background_button_green) }
+        binding.figureAnswers4.setOnClickListener { binding.figureAnswers4.setBackgroundResource(R.drawable.background_button_green) }
         binding.buttonNext.setOnClickListener()
         {
             if(IdCorrectButton==1)
@@ -101,13 +111,14 @@ class TestPageQuotes : AppCompatActivity() {
     }
     fun GetAuthors(Id:Int):String//получить автора из бд
     {
-        lateinit var a:Authors
-        a.Id=0
+        var Author:String=""
+
         RetrofitConnection().GetRetrofit().GetAuthor(Id).enqueue(object:Callback<Authors>{
             override fun onResponse(call: Call<Authors>, response: Response<Authors>) {
+                var r=response
                 if(response.code()==200)
                 {
-                    a=response.body()!!
+                    Author=response.body()!!.fio.toString()
                 }
             }
 
@@ -115,7 +126,7 @@ class TestPageQuotes : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         })
-        return a.Fio!!
+        return Author
     }
     fun RandomButtonAnswer(CorrectAuthor:String, Author1:String, Author2:String, Author3:String):Int//расставить авторов по кнопкам
     {
@@ -125,29 +136,29 @@ class TestPageQuotes : AppCompatActivity() {
 
             binding.figureAnswers1.text=CorrectAuthor
             binding.figureAnswers2.text=Author1
-            binding.figureAnswers1.text=Author2
-            binding.figureAnswers1.text=Author3
+            binding.figureAnswers3.text=Author2
+            binding.figureAnswers4.text=Author3
         }
         else if(RandomCorrectButton==2)
         {
             binding.figureAnswers1.text=Author1
             binding.figureAnswers2.text=CorrectAuthor
-            binding.figureAnswers1.text=Author2
-            binding.figureAnswers1.text=Author3
+            binding.figureAnswers3.text=Author2
+            binding.figureAnswers4.text=Author3
         }
         else if(RandomCorrectButton==3)
         {
             binding.figureAnswers1.text=Author1
             binding.figureAnswers2.text=Author2
-            binding.figureAnswers1.text=CorrectAuthor
-            binding.figureAnswers1.text=Author3
+            binding.figureAnswers3.text=CorrectAuthor
+            binding.figureAnswers4.text=Author3
         }
         else
         {
             binding.figureAnswers1.text=Author1
             binding.figureAnswers2.text=Author2
-            binding.figureAnswers1.text=Author3
-            binding.figureAnswers1.text=CorrectAuthor
+            binding.figureAnswers3.text=Author3
+            binding.figureAnswers4.text=CorrectAuthor
         }
         return RandomCorrectButton
     }

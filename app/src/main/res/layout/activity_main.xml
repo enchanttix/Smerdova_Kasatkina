@@ -8,8 +8,9 @@
     android:background="@color/white">
 
     <View
-        android:layout_width="300dp"
-        android:layout_height="375dp"
+        android:layout_width="316dp"
+        android:layout_height="268dp"
+        android:background="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
