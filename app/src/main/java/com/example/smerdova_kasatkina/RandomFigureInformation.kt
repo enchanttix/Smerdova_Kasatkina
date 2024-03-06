@@ -45,7 +45,7 @@ class RandomFigureInformation : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.IO).launch {//получение имени автора
             try {
-                RetrofitConnection().GetRetrofit().GetAuthor(1).enqueue(object : Callback<Authors> {
+                RetrofitConnection().GetRetrofit().GetAuthor(randomAuthor).enqueue(object : Callback<Authors> {
                     override fun onResponse(call: Call<Authors>, response: Response<Authors>) {
                         Log.d("Response", response.code().toString())
                         if (response.code() == 200) {
@@ -61,7 +61,7 @@ class RandomFigureInformation : AppCompatActivity() {
                         binding.figureName.text = Author.fio
                         binding.figureInformation.text = Author.description
                         binding.figureDate.text = Author.years_of_life
-                        Picasso.get().load(Author.image).into(binding.imageFigure)
+                        //Picasso.get().load(Author.image).into(binding.imageFigure)
                     }
 
                     override fun onFailure(call: Call<Authors>, t: Throwable) {
