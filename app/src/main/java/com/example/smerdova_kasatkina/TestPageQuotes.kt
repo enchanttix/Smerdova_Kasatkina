@@ -80,6 +80,9 @@ class TestPageQuotes : AppCompatActivity() {
                                     while (i!=IdAuthorCorrect)
                                     {
                                         IdNew=Random.nextInt(1, 100)
+                                        while (IdNew==IdAuthorCorrect){
+                                            IdNew=Random.nextInt(1, 100)
+                                        }
                                         i=IdAuthorCorrect!!
                                     }
 
@@ -100,6 +103,9 @@ class TestPageQuotes : AppCompatActivity() {
                                                     while (i!=IdAuthorCorrect)
                                                     {
                                                         IdNew=Random.nextInt(1, 100)
+                                                        while (IdNew==IdAuthorCorrect){
+                                                            IdNew=Random.nextInt(1, 100)
+                                                        }
                                                         i=IdAuthorCorrect!!
                                                     }
 
@@ -129,6 +135,9 @@ class TestPageQuotes : AppCompatActivity() {
                                                                     while (i!=IdAuthorCorrect)
                                                                     {
                                                                         IdNew=Random.nextInt(1, 100)
+                                                                        while (IdNew==IdAuthorCorrect){
+                                                                            IdNew=Random.nextInt(1, 100)
+                                                                        }
                                                                         i=IdAuthorCorrect!!
                                                                     }
 

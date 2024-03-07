@@ -72,38 +72,9 @@ class RandomFigureInformation : AppCompatActivity() {
             } catch (e: Exception) {
                 Log.d(ContentValues.TAG, e.toString()) // Вывод информации на консоль
             }
-            //getdata()
 
         }
-        /*fun SetInformationAuthors(Author: Authors) {
-            Log.println(Log.INFO, "API", "Я зашел в биндинг")
-            binding.figureName.text = Author.fio
-            binding.figureInformation.text = Author.description
-            binding.figureDate.text = Author.years_of_life
-        }*/
-        /*fun getdata() {
-        var retrofit = Retrofit.Builder()
-            .baseUrl("https://iis.ngknn.ru/NGKNN/МамшеваЮС/2/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(APIInterface::class.java)
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                var response = retrofit.GetAuthor(5).awaitResponse()
-                Log.d("Response", response.code().toString())
-                if (response.isSuccessful) {
-                      val data = response.body()!! // Получаем тело ответа
-                    binding.figureName.text = response.body()!!.fio
-                    binding.figureInformation.text = response.body()!!.description
-                    binding.figureDate.text = response.body()!!.years_of_life
-                    Log.d("Response", response.code().toString()) // Вывод информации на консоль
-                }
 
-            } catch (e: Exception) {
-                Log.d(ContentValues.TAG, e.toString()) // Вывод информации на консоль
-            }
-        }
-    }*/
     }
 }
 
